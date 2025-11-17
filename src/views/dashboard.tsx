@@ -12,7 +12,7 @@ export default () => {
           id="name"
           name="name"
           pattern="[a-zA-Z0-9-_]+"
-          minLength={5}
+          required
           className="px-3 py-2 border border-black/20 rounded-md focus:outline-none focus:ring-2 focus:ring-orange-300 focus:border-orange-500 w-30"
         />
       <span className="text-black/40">→</span>

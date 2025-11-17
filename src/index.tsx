@@ -66,7 +66,7 @@ app.get('/oauth2', async (c) => {
   });
   const user = await userResponse.json() as { email: string };
 
-  // // Check if email ends with allowed domains
+  // Check if email ends with allowed domains
   if (!user.email.endsWith('@latinschool.org') && !user.email.endsWith('@lsoc.org')) {
     return c.text('Only @latinschool.org and @lsoc.org emails can be used to login.', 403);
   }
@@ -110,9 +110,9 @@ app.post('/create', authMiddleware, async (c) => {
   }
 
   // Validate name length (minimum 5 characters)
-  if (name.length < 5) {
-    return c.text('Slug must be at least 5 characters long', 400);
-  }
+  // if (name.length < 5) {
+  //   return c.text('Slug must be at least 5 characters long', 400);
+  // }
 
   // Validate name format (alphanumeric, dash, underscore only)
   if (!/^[a-zA-Z0-9-_]+$/.test(name)) {
