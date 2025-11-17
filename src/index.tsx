@@ -72,10 +72,10 @@ app.get('/oauth2', async (c) => {
   }
 
   // Create JWT with email (expires in year 9999 - effectively forever)
-  const token = await sign({ email: user.email, exp: 253402300799 }, env.JWT_SECRET); // Year 9999 timestamp
+  const token = await sign({ email: user.email, exp: 253402300799 }, env.JWT_SECRET);
 
-  // Set cookie and redirect
-  c.header('Set-Cookie', `auth_token=${token}; HttpOnly; Secure; SameSite=Lax; Path=/`);
+  // Set cookie and redirect (Max-Age set to maximum 32-bit integer - effectively forever)
+  c.header('Set-Cookie', `auth_token=${token}; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=2147483647`);
   return c.redirect('/');
 });
 
