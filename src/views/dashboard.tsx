@@ -57,11 +57,6 @@ export default () => {
           const slugValue = slugInput.value.trim();
           if (!slugValue) {
             slugInput.value = generatedIdInput.value;
-          } else if (slugValue.length < 5) {
-            e.preventDefault();
-            alert('Slug must be at least 5 characters long');
-            slugInput.focus();
-            return false;
           }
         });
       })();
