@@ -67,9 +67,9 @@ app.get('/oauth2', async (c) => {
   const user = await userResponse.json() as { email: string };
 
   // // Check if email ends with allowed domains
-  // if (!user.email.endsWith('@latinschool.org') && !user.email.endsWith('@lsoc.org')) {
-  //   return c.text('Only @latinschool.org and @lsoc.org emails can be used to login.', 403);
-  // }
+  if (!user.email.endsWith('@latinschool.org') && !user.email.endsWith('@lsoc.org')) {
+    return c.text('Only @latinschool.org and @lsoc.org emails can be used to login.', 403);
+  }
 
   // Create JWT with email
   const token = await sign({ email: user.email }, env.JWT_SECRET);
