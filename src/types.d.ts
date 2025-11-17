@@ -3,5 +3,5 @@ type Link = {
   creator: string;
   destination: string;
   createdAt: string;
-  views: number;
+  clicks: number;
 };

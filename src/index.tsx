@@ -162,22 +162,22 @@ app.get('/:slug/manage', authMiddleware, async (c) => {
   }
 });
 
-// Redirect route - increment views
+// Redirect route - increment clicks
 app.get('/:slug', async (c) => {
   const slug = c.req.param('slug');
   
   try {
-    const link = await env.D1.prepare('SELECT destination, views FROM links WHERE id = ?').bind(slug).first() as { destination?: string; views?: number } | null;
+    const link = await env.D1.prepare('SELECT destination, clicks FROM links WHERE id = ?').bind(slug).first() as { destination?: string; clicks?: number } | null;
     
     if (!link) {
       return c.text('Link not found', 404);
     }
 
-    // Increment views (handle case where views column might not exist yet)
+    // Increment clicks (handle case where clicks column might not exist yet)
     try {
-      await env.D1.prepare('UPDATE links SET views = COALESCE(views, 0) + 1 WHERE id = ?').bind(slug).run();
+      await env.D1.prepare('UPDATE links SET clicks = COALESCE(clicks, 0) + 1 WHERE id = ?').bind(slug).run();
     } catch {
-      // Views column might not exist, ignore
+      // Clicks column might not exist, ignore
     }
 
     return c.redirect(link.destination!);
@@ -186,20 +186,20 @@ app.get('/:slug', async (c) => {
   }
 });
 
-// Get view count
-app.get('/api/links/:slug/views', async (c) => {
+// Get click count
+app.get('/api/links/:slug/clicks', async (c) => {
   const slug = c.req.param('slug');
 
   try {
-    const link = await env.D1.prepare('SELECT views FROM links WHERE id = ?').bind(slug).first() as { views?: number } | null;
+    const link = await env.D1.prepare('SELECT clicks FROM links WHERE id = ?').bind(slug).first() as { clicks?: number } | null;
     
     if (!link) {
-      return c.json({ views: 0 }, 404);
+      return c.json({ clicks: 0 }, 404);
     }
 
-    return c.json({ views: link.views || 0 });
+    return c.json({ clicks: link.clicks || 0 });
   } catch (error) {
-    return c.json({ views: 0 }, 500);
+    return c.json({ clicks: 0 }, 500);
   }
 });
 

@@ -22,7 +22,7 @@ export default ({ slug, shortUrl }: { slug: string; shortUrl: string }) => (
 
       <div className="w-full flex items-center justify-between text-sm">
         <span className="text-black/60">
-          <span className="font-mono" id="view-count">-</span> views
+          <span className="font-mono" id="click-count">-</span> clicks
         </span>
         <div className="flex gap-2">
           <button
@@ -103,22 +103,22 @@ export default ({ slug, shortUrl }: { slug: string; shortUrl: string }) => (
           }
         });
         
-        // Update view count
-        function updateViewCount() {
-          fetch('/api/links/' + slug + '/views')
+        // Update click count
+        function updateClickCount() {
+          fetch('/api/links/' + slug + '/clicks')
             .then(res => res.json())
             .then(data => {
-              const countEl = document.getElementById('view-count');
+              const countEl = document.getElementById('click-count');
               if (countEl) {
-                const views = data.views || 0;
-                countEl.textContent = views.toLocaleString();
+                const clicks = data.clicks || 0;
+                countEl.textContent = clicks.toLocaleString();
               }
             })
-            .catch(err => console.error('Failed to fetch views', err));
+            .catch(err => console.error('Failed to fetch clicks', err));
         }
         
-        updateViewCount();
-        setInterval(updateViewCount, 5000);
+        updateClickCount();
+        setInterval(updateClickCount, 5000);
       })();
     ` }} />
   </Layout>
