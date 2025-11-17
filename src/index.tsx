@@ -71,8 +71,8 @@ app.get('/oauth2', async (c) => {
     return c.text('Only @latinschool.org and @lsoc.org emails can be used to login.', 403);
   }
 
-  // Create JWT with email
-  const token = await sign({ email: user.email }, env.JWT_SECRET);
+  // Create JWT with email (expires in year 9999 - effectively forever)
+  const token = await sign({ email: user.email, exp: 253402300799 }, env.JWT_SECRET); // Year 9999 timestamp
 
   // Set cookie and redirect
   c.header('Set-Cookie', `auth_token=${token}; HttpOnly; Secure; SameSite=Lax; Path=/`);
