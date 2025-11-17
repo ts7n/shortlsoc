@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/forms";
+
+html, body {
+  height: 100%;
+}
+
+@theme {
+  --background-image-pattern: url('/static/background.png');
+  --font-sans: InterVariable, sans-serif;
+  --font-sans--font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+}

@@ -1,0 +1,31 @@
+{
+	"name": "shortlsoc",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "tailwindcss -i ./src/views/style.css -o ./public/style.css && wrangler deploy",
+		"dev": "concurrently 'wrangler dev' 'tailwindcss -i ./src/views/style.css -o ./public/style.css --watch'",
+		"start": "npm run dev",
+		"test": "vitest",
+		"cf-typegen": "wrangler types"
+	},
+	"devDependencies": {
+		"@cloudflare/vitest-pool-workers": "^0.8.19",
+		"@cloudflare/workers-types": "^4.20251115.0",
+		"@types/react": "^19.2.5",
+		"typescript": "^5.5.2",
+		"vitest": "~3.2.0",
+		"wrangler": "^4.47.0"
+	},
+	"dependencies": {
+		"@tailwindcss/cli": "^4.1.17",
+		"@tailwindcss/forms": "^0.5.10",
+		"@tailwindcss/typography": "^0.5.19",
+		"concurrently": "^9.2.1",
+		"hono": "^4.10.6",
+		"nanoid": "^5.1.6",
+		"qrcode.react": "^4.2.0",
+		"react": "^19.2.0",
+		"tailwindcss": "^4.1.17"
+	}
+}
